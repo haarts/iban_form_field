@@ -8,7 +8,7 @@ Created from templates made available by Stagehand under a BSD-style
 A simple usage example:
 
 ```dart
-import 'package:iban_formfield/iban_formfield.dart';
+import 'package:iban_form_field/iban_form_field.dart';
 
 main() {
   var awesome = new Awesome();
