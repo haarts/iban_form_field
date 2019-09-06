@@ -13,4 +13,7 @@ class Iban {
   Iban(this.countryCode);
 
   get maxBasicBankAccountNumberLength => _maxLengths[countryCode];
+
+  String toString() =>
+      "IBAN($countryCode $checkDigits $basicBankAccountNumber)";
 }
