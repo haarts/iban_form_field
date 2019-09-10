@@ -1,0 +1,82 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import 'package:iban/iban.dart' as iban;
+
+class IbanPasteInputFormatter extends TextInputFormatter {
+  TextEditingController countryCodeController;
+  TextEditingController checkDigitsController;
+  TextEditingController basicBankAccountNumberController;
+
+  final RegExp toBeReturnedPart;
+
+  static RegExp countryCodeRegExp = RegExp(r'^([A-Z]{2})');
+  static RegExp checkDigitsRegExp = RegExp(r'^[A-Z]{2}([0-9]{2})');
+  static RegExp basicBankAccountNumberRegExp = RegExp(r'^.{4}(.+$)');
+
+  IbanPasteInputFormatter.countryCode(
+    this.checkDigitsController,
+    this.basicBankAccountNumberController,
+  ) : this.toBeReturnedPart = countryCodeRegExp;
+
+  IbanPasteInputFormatter.checkDigits(
+    this.countryCodeController,
+    this.basicBankAccountNumberController,
+  ) : this.toBeReturnedPart = checkDigitsRegExp;
+
+  IbanPasteInputFormatter.basicBankAccountNumber(
+    this.countryCodeController,
+    this.checkDigitsController,
+  ) : this.toBeReturnedPart = basicBankAccountNumberRegExp;
+
+  @override
+  TextEditingValue formatEditUpdate(oldValue, newValue) {
+    var possibleIban = newValue.text.replaceAll(' ', '');
+    var matchedSpecification = iban.specifications.values.firstWhere(
+      (specification) => RegExp(_withoutAnchors(specification.regexDef))
+          .hasMatch(possibleIban),
+      orElse: () => null,
+    );
+
+    if (matchedSpecification == null) {
+      return newValue;
+    }
+
+    var flatIban = RegExp(_withoutAnchors(matchedSpecification.regexDef))
+        .firstMatch(possibleIban)
+        .group(0);
+
+    _filloutOtherControllers(flatIban);
+
+    var newText = toBeReturnedPart.firstMatch(flatIban).group(1);
+    return TextEditingValue(
+      text: newText,
+      selection: TextSelection.collapsed(
+        offset: newText.length,
+      ),
+    );
+  }
+
+  void _filloutOtherControllers(String flatIban) {
+    if (toBeReturnedPart == countryCodeRegExp) {
+      checkDigitsController.text =
+          checkDigitsRegExp.firstMatch(flatIban).group(1);
+      basicBankAccountNumberController.text =
+          basicBankAccountNumberRegExp.firstMatch(flatIban).group(1);
+    } else if (toBeReturnedPart == checkDigitsRegExp) {
+      countryCodeController.text =
+          countryCodeRegExp.firstMatch(flatIban).group(1);
+      basicBankAccountNumberController.text =
+          basicBankAccountNumberRegExp.firstMatch(flatIban).group(1);
+    } else {
+      countryCodeController.text =
+          countryCodeRegExp.firstMatch(flatIban).group(1);
+      checkDigitsController.text =
+          checkDigitsRegExp.firstMatch(flatIban).group(1);
+    }
+  }
+
+  String _withoutAnchors(String regex) {
+    return regex.substring(1, regex.length - 1);
+  }
+}
