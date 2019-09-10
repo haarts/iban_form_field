@@ -145,8 +145,8 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
             key: Key('country-code'),
             controller: _controllerCountryCode,
             focusNode: _focusCountryCode,
-            decoration: const InputDecoration(
-              hintText: 'CH',
+            decoration: InputDecoration(
+              hintText: widget.state.widget.initialValue.countryCode,
             ),
             textInputAction: TextInputAction.next,
             onSaved: (countryCode) {
