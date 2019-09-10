@@ -32,31 +32,34 @@ class _ExampleState extends State<Example> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Form(
-              key: _formKey,
-              child: IbanFormField(
-                onSaved: (iban) => _iban = iban,
-                initialValue: Iban('NL'),
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Form(
+                key: _formKey,
+                child: IbanFormField(
+                  onSaved: (iban) => _iban = iban,
+                  initialValue: Iban('NL'),
+                ),
               ),
-            ),
-            RaisedButton(
-              child: Text('show'),
-              onPressed: () {
-                _formKey.currentState.save();
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      content: Text(_iban.toString()),
-                    );
-                  },
-                );
-              },
-            ),
-          ],
+              RaisedButton(
+                child: Text('show'),
+                onPressed: () {
+                  _formKey.currentState.save();
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        content: Text(_iban.toString()),
+                      );
+                    },
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
