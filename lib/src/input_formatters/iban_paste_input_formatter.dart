@@ -61,13 +61,13 @@ class IbanPasteInputFormatter extends TextInputFormatter {
     if (toBeReturnedPart == countryCodeRegExp) {
       checkDigitsController.text =
           checkDigitsRegExp.firstMatch(flatIban).group(1);
-      basicBankAccountNumberController.text =
-          _inGroupsOf4(basicBankAccountNumberRegExp.firstMatch(flatIban).group(1));
+      basicBankAccountNumberController.text = _inGroupsOf4(
+          basicBankAccountNumberRegExp.firstMatch(flatIban).group(1));
     } else if (toBeReturnedPart == checkDigitsRegExp) {
       countryCodeController.text =
           countryCodeRegExp.firstMatch(flatIban).group(1);
-      basicBankAccountNumberController.text =
-          _inGroupsOf4(basicBankAccountNumberRegExp.firstMatch(flatIban).group(1));
+      basicBankAccountNumberController.text = _inGroupsOf4(
+          basicBankAccountNumberRegExp.firstMatch(flatIban).group(1));
     } else {
       countryCodeController.text =
           countryCodeRegExp.firstMatch(flatIban).group(1);
