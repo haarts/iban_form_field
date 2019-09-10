@@ -18,22 +18,36 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Example extends StatelessWidget {
+final _formKey = GlobalKey<FormState>();
+
+class Example extends StatefulWidget {
+  @override
+  _ExampleState createState() => _ExampleState();
+}
+
+class _ExampleState extends State<Example> {
+  Iban _iban;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: IbanFormField(
-          initialValue: Iban("NL"),
+        child: Form(
+          key: _formKey,
+          child: IbanFormField(
+            onSaved: (iban) => _iban = iban,
+            initialValue: Iban('NL'),
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          _formKey.currentState.save();
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => Result(
-                Iban('NL'),
+                _iban,
               ),
             ),
           );
