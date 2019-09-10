@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test/test.dart';
-import 'package:iban_form_field/iban_form_field.dart';
+import 'package:iban_form_field/src/input_formatters/spaced_text_input_formatter.dart';
 
 void main() {
   group("adding", () {
@@ -110,7 +110,6 @@ void main() {
         expect(reformatted.text, equals("AAAA"));
         expect(reformatted.selection.baseOffset, equals(2));
       });
-
     });
   });
 }
@@ -121,4 +120,3 @@ TextEditingValue generate(String text, int position) {
     selection: TextSelection.collapsed(offset: position),
   );
 }
-
