@@ -1,3 +1,6 @@
+v0.1.2
+- Fix botched 0.1.1 release
+ 
 v0.1.1
 - Reformat in groups of 4 after paste
 - Add `electronicFormat` to IBAN object
