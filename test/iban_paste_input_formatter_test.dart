@@ -23,7 +23,7 @@ void main() {
       expect(reformatted.text, equals("NL"));
       expect(reformatted.selection.baseOffset, equals(2));
       expect(checkDigits.text, equals("09"));
-      expect(basicBankAccountNumber.text, equals("ABNA6775613067"));
+      expect(basicBankAccountNumber.text, equals("ABNA 6775 6130 67"));
     });
 
     test('paste an IBAN with spaces', () {
@@ -41,7 +41,7 @@ void main() {
       expect(reformatted.text, equals("NL"));
       expect(reformatted.selection.baseOffset, equals(2));
       expect(checkDigits.text, equals("09"));
-      expect(basicBankAccountNumber.text, equals("ABNA6775613067"));
+      expect(basicBankAccountNumber.text, equals("ABNA 6775 6130 67"));
     });
 
     test('ignore previous input', () {
@@ -59,7 +59,7 @@ void main() {
       expect(reformatted.text, equals("NL"));
       expect(reformatted.selection.baseOffset, equals(2));
       expect(checkDigits.text, equals("09"));
-      expect(basicBankAccountNumber.text, equals("ABNA6775613067"));
+      expect(basicBankAccountNumber.text, equals("ABNA 6775 6130 67"));
     });
 
     test('paste a too long non IBAN string', () {});

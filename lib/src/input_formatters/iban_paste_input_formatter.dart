@@ -48,7 +48,7 @@ class IbanPasteInputFormatter extends TextInputFormatter {
 
     _filloutOtherControllers(flatIban);
 
-    var newText = toBeReturnedPart.firstMatch(flatIban).group(1);
+    var newText = _inGroupsOf4(toBeReturnedPart.firstMatch(flatIban).group(1));
     return TextEditingValue(
       text: newText,
       selection: TextSelection.collapsed(
@@ -62,18 +62,23 @@ class IbanPasteInputFormatter extends TextInputFormatter {
       checkDigitsController.text =
           checkDigitsRegExp.firstMatch(flatIban).group(1);
       basicBankAccountNumberController.text =
-          basicBankAccountNumberRegExp.firstMatch(flatIban).group(1);
+          _inGroupsOf4(basicBankAccountNumberRegExp.firstMatch(flatIban).group(1));
     } else if (toBeReturnedPart == checkDigitsRegExp) {
       countryCodeController.text =
           countryCodeRegExp.firstMatch(flatIban).group(1);
       basicBankAccountNumberController.text =
-          basicBankAccountNumberRegExp.firstMatch(flatIban).group(1);
+          _inGroupsOf4(basicBankAccountNumberRegExp.firstMatch(flatIban).group(1));
     } else {
       countryCodeController.text =
           countryCodeRegExp.firstMatch(flatIban).group(1);
       checkDigitsController.text =
           checkDigitsRegExp.firstMatch(flatIban).group(1);
     }
+  }
+
+  String _inGroupsOf4(String s) {
+    var every4Chars = new RegExp(r'(.{4})(?!$)');
+    return s.replaceAllMapped(every4Chars, (match) => '${match[0]} ');
   }
 
   String _withoutAnchors(String regex) {
