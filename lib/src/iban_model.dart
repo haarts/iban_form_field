@@ -16,6 +16,10 @@ class Iban {
 
   get maxBasicBankAccountNumberLength => hintText.length;
 
+  get electronicFormat => '$countryCode$checkDigits$basicBankAccountNumber';
+
+  get isValid => iban.isValid(electronicFormat);
+
   String toString() =>
       "IBAN($countryCode $checkDigits $basicBankAccountNumber)";
 }
