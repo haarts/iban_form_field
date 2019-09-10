@@ -1,18 +1,20 @@
+import 'package:iban/iban.dart' as iban;
+
 class Iban {
-  final String countryCode;
+  String countryCode;
   String checkDigits;
   String basicBankAccountNumber;
 
-  /// Mapping between country and the maximum length of the basic bank account number.
-  /// Source: https://bfsfcu.org/pdf/IBAN.pdf
-  static Map<String, int> _maxLengths = {
-    "NL": 18,
-    "CH": 21,
-  };
-
   Iban(this.countryCode);
 
-  get maxBasicBankAccountNumberLength => _maxLengths[countryCode];
+  String get hintText {
+    var every4Chars = new RegExp(r'(.{4})(?!$)');
+    return iban.specifications[countryCode].example
+        .substring(4, iban.specifications[countryCode].example.length)
+        .replaceAllMapped(every4Chars, (match) => '${match.group(0)} ');
+  }
+
+  get maxBasicBankAccountNumberLength => hintText.length;
 
   String toString() =>
       "IBAN($countryCode $checkDigits $basicBankAccountNumber)";
