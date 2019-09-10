@@ -1,22 +1,16 @@
-A library for Dart developers.
+A Flutter widget for capturing IBANs.
 
-Created from templates made available by Stagehand under a BSD-style
-[license](https://github.com/dart-lang/stagehand/blob/master/LICENSE).
+It features several features:
+- Paste detection of IBANs
+- Automatic field advancement
+- Country specific hints
 
 ## Usage
 
-A simple usage example:
-
-```dart
-import 'package:iban_form_field/iban_form_field.dart';
-
-main() {
-  var awesome = new Awesome();
-}
-```
+See the [`example`](example/) directory.
 
 ## Features and bugs
 
 Please file feature requests and bugs at the [issue tracker][tracker].
 
-[tracker]: http://example.com/issues/replaceme
+[tracker]: https://github.com/inapay/iban_form_field/issues
