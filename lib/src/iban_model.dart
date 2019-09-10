@@ -7,7 +7,7 @@ class Iban {
 
   Iban(this.countryCode);
 
-  String get hintText {
+  get hintText {
     var every4Chars = new RegExp(r'(.{4})(?!$)');
     return iban.specifications[countryCode].example
         .substring(4, iban.specifications[countryCode].example.length)
