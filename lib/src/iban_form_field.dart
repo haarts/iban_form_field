@@ -84,6 +84,8 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
         widget.state.value.basicBankAccountNumber?.length ?? 0;
 
     _controllerCountryCode.addListener(() {
+      widget.state.value.countryCode = _controllerCountryCode.text;
+
       if (_lastCountryCodeCharacterAdded(
           _controllerCountryCode.text.length, _previousCountryCodeLength)) {
         setState(() {
@@ -96,6 +98,8 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
     });
 
     _controllerCheckDigits.addListener(() {
+      widget.state.value.checkDigits = _controllerCheckDigits.text;
+
       if (_lastCheckDigitCharacterDeleted(
           _controllerCheckDigits.text.length, _previousCheckDigitsLength)) {
         _focusCheckDigits.previousFocus();
@@ -110,6 +114,9 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
     });
 
     _controllerBasicBankAccountNumber.addListener(() {
+      widget.state.value.basicBankAccountNumber =
+          _controllerBasicBankAccountNumber.text;
+
       if (_lastBasicBankAccountNumberCharacterDeleted(
           _controllerBasicBankAccountNumber.text.length,
           _previousBasicBankAccountNumberLength)) {
@@ -174,7 +181,7 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
           child: TextFormField(
             controller: _controllerCheckDigits,
             focusNode: _focusCheckDigits,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               hintText: '12',
               errorText: widget.state.hasError ? "" : null,
             ),

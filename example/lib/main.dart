@@ -40,11 +40,22 @@ class _ExampleState extends State<Example> {
                 child: IbanFormField(
                   onSaved: (iban) => _iban = iban,
                   initialValue: Iban('NL'),
+                  validator: (iban) {
+                    if(!iban.isValid) {
+                      print(iban);
+                      return "This IBAN is not valid";
+                    }
+                    return null;
+                  },
                 ),
               ),
               RaisedButton(
                 child: Text('show'),
                 onPressed: () {
+                  if(!_formKey.currentState.validate()) {
+                    return;
+                  }
+
                   _formKey.currentState.save();
                   showDialog(
                     context: context,
