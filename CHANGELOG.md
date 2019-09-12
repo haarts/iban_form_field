@@ -1,3 +1,6 @@
+v0.1.4
+- Add toPrintFormat and decent electronicFormat methods
+ 
 v0.1.3
 - Add validation error
  
