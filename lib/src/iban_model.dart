@@ -8,7 +8,7 @@ class Iban {
   Iban(this.countryCode);
 
   get hintText {
-    var every4Chars = new RegExp(r'(.{4})(?!$)');
+    var every4Chars = RegExp(r'(.{4})(?!$)');
     return iban.specifications[countryCode].example
         .substring(4, iban.specifications[countryCode].example.length)
         .replaceAllMapped(every4Chars, (match) => '${match.group(0)} ');
