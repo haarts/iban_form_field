@@ -139,91 +139,105 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          constraints: BoxConstraints.tightFor(
-            width: Theme.of(widget.state.context).textTheme.body1.fontSize *
-                1.1 *
-                2,
-          ),
-          padding: EdgeInsets.only(right: 5),
-          child: TextFormField(
-            key: Key('country-code'),
-            controller: _controllerCountryCode,
-            focusNode: _focusCountryCode,
-            decoration: InputDecoration(
-              hintText: widget.state.widget.initialValue.countryCode,
-              errorText: widget.state.hasError ? "" : null,
-            ),
-            textInputAction: TextInputAction.next,
-            onSaved: (countryCode) {
-              widget.state.value.countryCode = countryCode;
-            },
-            textCapitalization: TextCapitalization.characters,
-            inputFormatters: [
-              IbanPasteInputFormatter.countryCode(
-                _controllerCheckDigits,
-                _controllerBasicBankAccountNumber,
+        Row(
+          children: [
+            Container(
+              constraints: BoxConstraints.tightFor(
+                width: Theme.of(widget.state.context).textTheme.body1.fontSize *
+                    1.1 *
+                    2,
               ),
-              LengthLimitingTextInputFormatter(2),
-              WhitelistingTextInputFormatter(RegExp("[A-Z]")),
-            ],
-          ),
-        ),
-        Container(
-          constraints: BoxConstraints.tightFor(
-            width: Theme.of(widget.state.context).textTheme.body1.fontSize *
-                1.1 *
-                2,
-          ),
-          padding: EdgeInsets.only(right: 5),
-          child: TextFormField(
-            controller: _controllerCheckDigits,
-            focusNode: _focusCheckDigits,
-            decoration: InputDecoration(
-              hintText: '12',
-              errorText: widget.state.hasError ? "" : null,
-            ),
-            textInputAction: TextInputAction.next,
-            onSaved: (checkDigits) {
-              widget.state.value.checkDigits = checkDigits;
-            },
-            keyboardType: TextInputType.numberWithOptions(),
-            inputFormatters: [
-              IbanPasteInputFormatter.checkDigits(
-                _controllerCountryCode,
-                _controllerBasicBankAccountNumber,
+              padding: EdgeInsets.only(right: 5),
+              child: TextFormField(
+                key: Key('country-code'),
+                controller: _controllerCountryCode,
+                focusNode: _focusCountryCode,
+                decoration: InputDecoration(
+                  hintText: widget.state.widget.initialValue.countryCode,
+                  errorText: widget.state.hasError ? "" : null,
+                ),
+                textInputAction: TextInputAction.next,
+                onSaved: (countryCode) {
+                  widget.state.value.countryCode = countryCode;
+                },
+                textCapitalization: TextCapitalization.characters,
+                inputFormatters: [
+                  IbanPasteInputFormatter.countryCode(
+                    _controllerCheckDigits,
+                    _controllerBasicBankAccountNumber,
+                  ),
+                  LengthLimitingTextInputFormatter(2),
+                  WhitelistingTextInputFormatter(RegExp("[A-Z]")),
+                ],
               ),
-              LengthLimitingTextInputFormatter(2),
-              WhitelistingTextInputFormatter(RegExp("[0-9]")),
-            ],
-          ),
-        ),
-        Flexible(
-          child: TextFormField(
-            controller: _controllerBasicBankAccountNumber,
-            focusNode: _focusBasicBankAccountNumber,
-            decoration: InputDecoration(
-              hintText: widget.state.value.hintText,
-              errorText: widget.state.hasError ? "" : null,
             ),
-            onSaved: (basicBankAccountNumber) {
-              widget.state.value.basicBankAccountNumber =
-                  basicBankAccountNumber;
-            },
-            textCapitalization: TextCapitalization.characters,
-            inputFormatters: [
-              IbanPasteInputFormatter.basicBankAccountNumber(
-                _controllerCountryCode,
-                _controllerCheckDigits,
+            Container(
+              constraints: BoxConstraints.tightFor(
+                width: Theme.of(widget.state.context).textTheme.body1.fontSize *
+                    1.1 *
+                    2,
               ),
-              LengthLimitingTextInputFormatter(
-                  widget.state.value.maxBasicBankAccountNumberLength),
-              SpacedTextInputFormatter(),
-            ],
-          ),
+              padding: EdgeInsets.only(right: 5),
+              child: TextFormField(
+                controller: _controllerCheckDigits,
+                focusNode: _focusCheckDigits,
+                decoration: InputDecoration(
+                  hintText: '12',
+                  errorText: widget.state.hasError ? "" : null,
+                ),
+                textInputAction: TextInputAction.next,
+                onSaved: (checkDigits) {
+                  widget.state.value.checkDigits = checkDigits;
+                },
+                keyboardType: TextInputType.numberWithOptions(),
+                inputFormatters: [
+                  IbanPasteInputFormatter.checkDigits(
+                    _controllerCountryCode,
+                    _controllerBasicBankAccountNumber,
+                  ),
+                  LengthLimitingTextInputFormatter(2),
+                  WhitelistingTextInputFormatter(RegExp("[0-9]")),
+                ],
+              ),
+            ),
+            Flexible(
+              child: TextFormField(
+                controller: _controllerBasicBankAccountNumber,
+                focusNode: _focusBasicBankAccountNumber,
+                decoration: InputDecoration(
+                  hintText: widget.state.value.hintText,
+                  errorText: widget.state.hasError ? "" : null,
+                ),
+                onSaved: (basicBankAccountNumber) {
+                  widget.state.value.basicBankAccountNumber =
+                      basicBankAccountNumber;
+                },
+                textCapitalization: TextCapitalization.characters,
+                inputFormatters: [
+                  IbanPasteInputFormatter.basicBankAccountNumber(
+                    _controllerCountryCode,
+                    _controllerCheckDigits,
+                  ),
+                  LengthLimitingTextInputFormatter(
+                      widget.state.value.maxBasicBankAccountNumberLength),
+                  SpacedTextInputFormatter(),
+                ],
+              ),
+            ),
+          ],
         ),
+        if (widget.state.hasError)
+          Text(
+            widget.state.errorText,
+            style: Theme.of(context).inputDecorationTheme.errorStyle ??
+                Theme.of(context)
+                    .textTheme
+                    .caption
+                    .copyWith(color: Theme.of(context).errorColor),
+          ),
       ],
     );
   }
