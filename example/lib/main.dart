@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iban_form_field/iban_form_field.dart';
 
-import 'package:example/result.dart';
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
