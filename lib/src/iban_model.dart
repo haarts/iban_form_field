@@ -8,9 +8,11 @@ class Iban {
   Iban(this.countryCode);
 
   get hintText {
+    var particularSpecification = iban.specifications[countryCode.isEmpty ? 'CH' : countryCode];
+
     var every4Chars = RegExp(r'(.{4})(?!$)');
-    return iban.specifications[countryCode].example
-        .substring(4, iban.specifications[countryCode].example.length)
+    return particularSpecification.example
+        .substring(4, particularSpecification.example.length)
         .replaceAllMapped(every4Chars, (match) => '${match.group(0)} ');
   }
 
