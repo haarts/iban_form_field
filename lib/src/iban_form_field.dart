@@ -147,18 +147,19 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
             focusNode: _focusCountryCode,
             decoration: InputDecoration(
               hintText: widget.state.widget.initialValue.countryCode,
+              errorText: widget.state.hasError ? "" : null,
             ),
             textInputAction: TextInputAction.next,
             onSaved: (countryCode) {
               widget.state.value.countryCode = countryCode;
             },
-            maxLength: 2,
             textCapitalization: TextCapitalization.characters,
             inputFormatters: [
               IbanPasteInputFormatter.countryCode(
                 _controllerCheckDigits,
                 _controllerBasicBankAccountNumber,
               ),
+              LengthLimitingTextInputFormatter(2),
               WhitelistingTextInputFormatter(RegExp("[A-Z]")),
             ],
           ),
@@ -175,18 +176,19 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
             focusNode: _focusCheckDigits,
             decoration: const InputDecoration(
               hintText: '12',
+              errorText: widget.state.hasError ? "" : null,
             ),
             textInputAction: TextInputAction.next,
             onSaved: (checkDigits) {
               widget.state.value.checkDigits = checkDigits;
             },
-            maxLength: 2,
             keyboardType: TextInputType.numberWithOptions(),
             inputFormatters: [
               IbanPasteInputFormatter.checkDigits(
                 _controllerCountryCode,
                 _controllerBasicBankAccountNumber,
               ),
+              LengthLimitingTextInputFormatter(2),
               WhitelistingTextInputFormatter(RegExp("[0-9]")),
             ],
           ),
@@ -197,18 +199,20 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
             focusNode: _focusBasicBankAccountNumber,
             decoration: InputDecoration(
               hintText: widget.state.value.hintText,
+              errorText: widget.state.hasError ? "" : null,
             ),
             onSaved: (basicBankAccountNumber) {
               widget.state.value.basicBankAccountNumber =
                   basicBankAccountNumber;
             },
-            maxLength: widget.state.value.maxBasicBankAccountNumberLength,
             textCapitalization: TextCapitalization.characters,
             inputFormatters: [
               IbanPasteInputFormatter.basicBankAccountNumber(
                 _controllerCountryCode,
                 _controllerCheckDigits,
               ),
+              LengthLimitingTextInputFormatter(
+                  widget.state.value.maxBasicBankAccountNumberLength),
               SpacedTextInputFormatter(),
             ],
           ),
