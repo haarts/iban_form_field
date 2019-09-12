@@ -233,13 +233,16 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
           ],
         ),
         if (widget.state.hasError)
-          Text(
-            widget.state.errorText,
-            style: Theme.of(context).inputDecorationTheme.errorStyle ??
-                Theme.of(context)
-                    .textTheme
-                    .caption
-                    .copyWith(color: Theme.of(context).errorColor),
+          Padding(
+            padding: EdgeInsets.only(top: 5),
+            child: Text(
+              widget.state.errorText,
+              style: Theme.of(context).inputDecorationTheme.errorStyle ??
+                  Theme.of(context)
+                      .textTheme
+                      .caption
+                      .copyWith(color: Theme.of(context).errorColor),
+            ),
           ),
       ],
     );
