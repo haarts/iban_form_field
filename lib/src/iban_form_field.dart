@@ -158,6 +158,7 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
                 decoration: InputDecoration(
                   hintText: widget.state.widget.initialValue.countryCode,
                   errorText: widget.state.hasError ? "" : null,
+                  errorStyle: TextStyle(height: 0),
                 ),
                 textInputAction: TextInputAction.next,
                 onSaved: (countryCode) {
@@ -187,6 +188,7 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
                 decoration: InputDecoration(
                   hintText: '12',
                   errorText: widget.state.hasError ? "" : null,
+                  errorStyle: TextStyle(height: 0),
                 ),
                 textInputAction: TextInputAction.next,
                 onSaved: (checkDigits) {
@@ -210,6 +212,7 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
                 decoration: InputDecoration(
                   hintText: widget.state.value.hintText,
                   errorText: widget.state.hasError ? "" : null,
+                  errorStyle: TextStyle(height: 0),
                 ),
                 onSaved: (basicBankAccountNumber) {
                   widget.state.value.basicBankAccountNumber =
