@@ -1,3 +1,6 @@
+v0.1.3
+- Add validation error
+ 
 v0.1.2
 - Fix botched 0.1.1 release
  
