@@ -1,5 +1,6 @@
 v0.1.5
 - Fix bug in hintText
+- Remove numeric keyboard for check digits
 
 v0.1.4
 - Add toPrintFormat and decent electronicFormat methods

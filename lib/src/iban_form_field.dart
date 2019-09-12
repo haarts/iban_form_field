@@ -194,7 +194,6 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
                 onSaved: (checkDigits) {
                   widget.state.value.checkDigits = checkDigits;
                 },
-                keyboardType: TextInputType.numberWithOptions(),
                 inputFormatters: [
                   IbanPasteInputFormatter.checkDigits(
                     _controllerCountryCode,
