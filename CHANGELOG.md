@@ -1,3 +1,6 @@
+v0.1.6
+- Add keys to TextFormFields for testing
+
 v0.1.5
 - Fix bug in hintText
 - Remove numeric keyboard for check digits

@@ -151,7 +151,7 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
               ),
               padding: EdgeInsets.only(right: 5),
               child: TextFormField(
-                key: Key('country-code'),
+                key: Key('iban-form-field-country-code'),
                 controller: _controllerCountryCode,
                 focusNode: _focusCountryCode,
                 decoration: InputDecoration(
@@ -182,6 +182,7 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
               ),
               padding: EdgeInsets.only(right: 5),
               child: TextFormField(
+                key: Key('iban-form-field-check-digits'),
                 controller: _controllerCheckDigits,
                 focusNode: _focusCheckDigits,
                 decoration: InputDecoration(
@@ -205,6 +206,7 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
             ),
             Flexible(
               child: TextFormField(
+                key: Key('iban-form-field-basic-bank-account-number'),
                 controller: _controllerBasicBankAccountNumber,
                 focusNode: _focusBasicBankAccountNumber,
                 decoration: InputDecoration(
