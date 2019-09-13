@@ -41,8 +41,7 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
 
   // Used for jumping to next/previous field
   final FocusNode _focusCountryCode = FocusNode();
-  final FocusNode _focusCheckDigits =
-      FocusNode(debugLabel: 'check-digits-focus-node');
+  final FocusNode _focusCheckDigits = FocusNode();
   final FocusNode _focusBasicBankAccountNumber = FocusNode();
 
   // Used to determine if the user added or deleted characters
