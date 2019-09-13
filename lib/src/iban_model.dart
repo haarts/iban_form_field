@@ -8,7 +8,10 @@ class Iban {
   Iban(this.countryCode);
 
   get hintText {
-    var particularSpecification = iban.specifications[countryCode.isEmpty ? 'CH' : countryCode];
+    var particularSpecification = iban.specifications['CH'];
+    if (iban.specifications.containsKey(countryCode)) {
+      particularSpecification = iban.specifications[countryCode];
+    }
 
     var every4Chars = RegExp(r'(.{4})(?!$)');
     return particularSpecification.example

@@ -1,3 +1,6 @@
+v0.1.7
+- Fix indexing bug
+
 v0.1.6
 - Add keys to TextFormFields for testing
 

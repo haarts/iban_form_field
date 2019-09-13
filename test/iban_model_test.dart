@@ -23,5 +23,13 @@ void main() {
     var iban = Iban('');
 
     expect(iban.hintText, '0076 2011 6238 5295 7');
+
+    iban = Iban('C');
+
+    expect(iban.hintText, '0076 2011 6238 5295 7');
+
+    iban = Iban('QQ');
+
+    expect(iban.hintText, '0076 2011 6238 5295 7');
   });
 }
