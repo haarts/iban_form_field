@@ -1,3 +1,6 @@
+v0.1.8
+- Disable digit grouping on Android
+
 v0.1.7
 - Fix indexing bug
 
