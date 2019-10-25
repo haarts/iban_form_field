@@ -157,7 +157,7 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
                 controller: _controllerCountryCode,
                 focusNode: _focusCountryCode,
                 decoration: InputDecoration(
-                  hintText: widget.state.widget.initialValue.countryCode,
+                  hintText: widget.state.value.countryCodeHintText,
                   errorText: widget.state.hasError ? "" : null,
                   errorStyle: TextStyle(height: 0),
                 ),
@@ -188,7 +188,7 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
                 controller: _controllerCheckDigits,
                 focusNode: _focusCheckDigits,
                 decoration: InputDecoration(
-                  hintText: '12',
+                  hintText: widget.state.value.checkDigitsHintText,
                   errorText: widget.state.hasError ? "" : null,
                   errorStyle: TextStyle(height: 0),
                 ),
@@ -212,7 +212,7 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
                 controller: _controllerBasicBankAccountNumber,
                 focusNode: _focusBasicBankAccountNumber,
                 decoration: InputDecoration(
-                  hintText: widget.state.value.hintText,
+                  hintText: widget.state.value.basicBankAccountNumberHintText,
                   errorText: widget.state.hasError ? "" : null,
                   errorStyle: TextStyle(height: 0),
                 ),

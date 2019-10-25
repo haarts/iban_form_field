@@ -19,17 +19,23 @@ void main() {
 		expect(iban.toPrintFormat, 'NL80 INGB 7569 0064 53');
   });
 
-  test('hintText without a countryCode', () {
+  test('hintText without a valid countryCode', () {
     var iban = Iban('');
 
-    expect(iban.hintText, '0076 2011 6238 5295 7');
+    expect(iban.countryCodeHintText, 'CH');
+    expect(iban.checkDigitsHintText, '93');
+    expect(iban.basicBankAccountNumberHintText, '0076 2011 6238 5295 7');
 
     iban = Iban('C');
 
-    expect(iban.hintText, '0076 2011 6238 5295 7');
+    expect(iban.countryCodeHintText, 'CH');
+    expect(iban.checkDigitsHintText, '93');
+    expect(iban.basicBankAccountNumberHintText, '0076 2011 6238 5295 7');
 
     iban = Iban('QQ');
 
-    expect(iban.hintText, '0076 2011 6238 5295 7');
+    expect(iban.countryCodeHintText, 'CH');
+    expect(iban.checkDigitsHintText, '93');
+    expect(iban.basicBankAccountNumberHintText, '0076 2011 6238 5295 7');
   });
 }
