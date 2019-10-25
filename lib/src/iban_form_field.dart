@@ -140,17 +140,16 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
 
   @override
   Widget build(BuildContext context) {
+    var constraints = BoxConstraints.tightFor(
+      width: Theme.of(widget.state.context).textTheme.body1.fontSize * 1.1 * 2,
+    );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
             Container(
-              constraints: BoxConstraints.tightFor(
-                width: Theme.of(widget.state.context).textTheme.body1.fontSize *
-                    1.1 *
-                    2,
-              ),
+              constraints: constraints,
               padding: EdgeInsets.only(right: 5),
               child: TextFormField(
                 key: Key('iban-form-field-country-code'),
@@ -177,11 +176,7 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
               ),
             ),
             Container(
-              constraints: BoxConstraints.tightFor(
-                width: Theme.of(widget.state.context).textTheme.body1.fontSize *
-                    1.1 *
-                    2,
-              ),
+              constraints: constraints,
               padding: EdgeInsets.only(right: 5),
               child: TextFormField(
                 key: Key('iban-form-field-check-digits'),
