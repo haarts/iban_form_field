@@ -1,6 +1,6 @@
 name: iban_form_field
 description: An IBAN form which deals with spacing and country specific rules.
-version: 0.1.8
+version: 0.1.9
 author: inapay POS authors <info@inapay.com>
 homepage: https://github.com/inapay/iban_form_field
 
