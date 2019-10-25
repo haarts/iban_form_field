@@ -77,7 +77,7 @@ class IbanPasteInputFormatter extends TextInputFormatter {
   }
 
   String _inGroupsOf4(String s) {
-    var every4Chars = new RegExp(r'(.{4})(?!$)');
+    var every4Chars = RegExp(r'(.{4})(?!$)');
     return s.replaceAllMapped(every4Chars, (match) => '${match[0]} ');
   }
 
