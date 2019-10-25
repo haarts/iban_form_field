@@ -1,4 +1,7 @@
-A Flutter widget for capturing IBANs.
+# A Flutter widget for capturing IBANs.
+
+[![pub package](https://img.shields.io/pub/v/iban_form_field.svg)](https://pub.dartlang.org/packages/iban_form_field)
+[![CircleCI](https://circleci.com/gh/inapay/iban_form_field.svg?style=svg)](https://circleci.com/gh/inapay/iban_form_field)
 
 It features several features:
 - Paste detection of IBANs
