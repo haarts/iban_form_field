@@ -13,20 +13,22 @@ class IbanFormField extends FormField<Iban> {
     FormFieldSetter<Iban> onSaved,
     FormFieldValidator<Iban> validator,
     Iban initialValue,
+    bool autofocus = false,
   }) : super(
           key: key,
           onSaved: onSaved,
           validator: validator,
           initialValue: initialValue ?? Iban(''),
           builder: (FormFieldState<Iban> state) {
-            return IbanFormFieldBuilder(state);
+            return IbanFormFieldBuilder(state, autofocus);
           },
         );
 }
 
 class IbanFormFieldBuilder extends StatefulWidget {
   final FormFieldState<Iban> state;
-  IbanFormFieldBuilder(this.state);
+  final bool autofocus;
+  IbanFormFieldBuilder(this.state, this.autofocus);
 
   @override
   State createState() => _IbanFormFieldState();
@@ -138,6 +140,23 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
     super.dispose();
   }
 
+  bool _autofocusForCountryCode() {
+    return widget.autofocus &&
+        _controllerCountryCode.text.length < _maxCountryCodeLength;
+  }
+
+  bool _autofocusForCheckDigits() {
+    return widget.autofocus &&
+        !_autofocusForCountryCode() &&
+        _controllerCheckDigits.text.length < _maxCheckDigitLength;
+  }
+
+  bool _autofocusForBasicBankAccountNumbers() {
+    return widget.autofocus &&
+        !_autofocusForCountryCode() &&
+        !_autofocusForCheckDigits();
+  }
+
   @override
   Widget build(BuildContext context) {
     var constraints = BoxConstraints.tightFor(
@@ -154,6 +173,7 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
               child: TextFormField(
                 key: Key('iban-form-field-country-code'),
                 controller: _controllerCountryCode,
+                autofocus: _autofocusForCountryCode(),
                 focusNode: _focusCountryCode,
                 decoration: InputDecoration(
                   hintText: widget.state.value.countryCodeHintText,
@@ -181,6 +201,7 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
               child: TextFormField(
                 key: Key('iban-form-field-check-digits'),
                 controller: _controllerCheckDigits,
+                autofocus: _autofocusForCheckDigits(),
                 focusNode: _focusCheckDigits,
                 decoration: InputDecoration(
                   hintText: widget.state.value.checkDigitsHintText,
@@ -205,6 +226,7 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
               child: TextFormField(
                 key: Key('iban-form-field-basic-bank-account-number'),
                 controller: _controllerBasicBankAccountNumber,
+                autofocus: _autofocusForBasicBankAccountNumbers(),
                 focusNode: _focusBasicBankAccountNumber,
                 decoration: InputDecoration(
                   hintText: widget.state.value.basicBankAccountNumberHintText,

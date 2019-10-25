@@ -1,3 +1,8 @@
+v0.1.9
+- Add `autofocus`
+- Generic hint texts for fields
+- Default to blank IBAN
+
 v0.1.8
 - Disable digit grouping on Android
 

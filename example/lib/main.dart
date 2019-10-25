@@ -40,6 +40,7 @@ class _ExampleState extends State<Example> {
                 child: IbanFormField(
                   onSaved: (iban) => _iban = iban,
                   initialValue: Iban('NL'),
+                  autofocus: true,
                   validator: (iban) {
                     if(!iban.isValid) {
                       print(iban);
