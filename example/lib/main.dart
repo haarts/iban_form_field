@@ -42,9 +42,9 @@ class _ExampleState extends State<Example> {
                   initialValue: Iban('NL'),
                   autofocus: true,
                   validator: (iban) {
-                    if(!iban.isValid) {
+                    if (!iban.isValid) {
                       print(iban);
-                      return "This IBAN is not valid";
+                      return 'This IBAN is not valid';
                     }
                     return null;
                   },
@@ -53,7 +53,7 @@ class _ExampleState extends State<Example> {
               RaisedButton(
                 child: Text('show'),
                 onPressed: () {
-                  if(!_formKey.currentState.validate()) {
+                  if (!_formKey.currentState.validate()) {
                     return;
                   }
 

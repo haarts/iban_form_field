@@ -7,27 +7,28 @@ class Iban {
 
   Iban(this.countryCode);
 
-  get countryCodeHintText => _example.substring(0, 2);
-  get checkDigitsHintText => _example.substring(2, 4);
+  String get countryCodeHintText => _example.substring(0, 2);
+  String get checkDigitsHintText => _example.substring(2, 4);
 
-  get basicBankAccountNumberHintText {
+  String get basicBankAccountNumberHintText {
     var every4Chars = RegExp(r'(.{4})(?!$)');
     return _example
         .substring(4, _example.length)
         .replaceAllMapped(every4Chars, (match) => '${match.group(0)} ');
   }
 
-  get maxBasicBankAccountNumberLength => basicBankAccountNumberHintText.length;
+  int get maxBasicBankAccountNumberLength =>
+      basicBankAccountNumberHintText.length;
 
-  get electronicFormat => iban.electronicFormat(_concat);
+  String get electronicFormat => iban.electronicFormat(_concat);
 
-  get toPrintFormat => iban.toPrintFormat(_concat);
+  String get toPrintFormat => iban.toPrintFormat(_concat);
 
-  get isValid => iban.isValid(electronicFormat);
+  bool get isValid => iban.isValid(electronicFormat);
 
-  get _concat => '$countryCode$checkDigits$basicBankAccountNumber';
+  String get _concat => '$countryCode$checkDigits$basicBankAccountNumber';
 
-  get _example {
+  String get _example {
     var particularSpecification = iban.specifications['CH'];
     if (iban.specifications.containsKey(countryCode)) {
       particularSpecification = iban.specifications[countryCode];
@@ -35,6 +36,7 @@ class Iban {
     return particularSpecification.example;
   }
 
+  @override
   String toString() =>
-      "IBAN($countryCode $checkDigits $basicBankAccountNumber)";
+      'IBAN($countryCode $checkDigits $basicBankAccountNumber)';
 }

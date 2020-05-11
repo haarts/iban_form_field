@@ -17,17 +17,17 @@ class IbanPasteInputFormatter extends TextInputFormatter {
   IbanPasteInputFormatter.countryCode(
     this.checkDigitsController,
     this.basicBankAccountNumberController,
-  ) : this.toBeReturnedPart = countryCodeRegExp;
+  ) : toBeReturnedPart = countryCodeRegExp;
 
   IbanPasteInputFormatter.checkDigits(
     this.countryCodeController,
     this.basicBankAccountNumberController,
-  ) : this.toBeReturnedPart = checkDigitsRegExp;
+  ) : toBeReturnedPart = checkDigitsRegExp;
 
   IbanPasteInputFormatter.basicBankAccountNumber(
     this.countryCodeController,
     this.checkDigitsController,
-  ) : this.toBeReturnedPart = basicBankAccountNumberRegExp;
+  ) : toBeReturnedPart = basicBankAccountNumberRegExp;
 
   @override
   TextEditingValue formatEditUpdate(oldValue, newValue) {

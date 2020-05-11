@@ -7,8 +7,8 @@ class SpacedTextInputFormatter extends TextInputFormatter {
     TextEditingValue oldValue,
     TextEditingValue newValue,
   ) {
-    String splitText = _splitInGroupsOfFour(newValue.text);
-    int numberOfSpacesAdded = splitText.length - newValue.text.length;
+    var splitText = _splitInGroupsOfFour(newValue.text);
+    var numberOfSpacesAdded = splitText.length - newValue.text.length;
 
     return TextEditingValue(
       text: splitText,
@@ -19,11 +19,11 @@ class SpacedTextInputFormatter extends TextInputFormatter {
   }
 
   String _splitInGroupsOfFour(String input) {
-    input = input.replaceAll(RegExp(" "), "");
-    List<String> segments = input.split('');
-    int groupSize = 4;
+    input = input.replaceAll(RegExp(' '), '');
+    var segments = input.split('');
+    var groupSize = 4;
     var added = 0;
-    String result = '';
+    var result = '';
     var it = segments.iterator;
     while (it.moveNext()) {
       if (added != 0 && added % groupSize == 0) {

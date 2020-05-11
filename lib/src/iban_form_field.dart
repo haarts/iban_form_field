@@ -160,7 +160,8 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
   @override
   Widget build(BuildContext context) {
     var constraints = BoxConstraints.tightFor(
-      width: Theme.of(widget.state.context).textTheme.body1.fontSize * 1.1 * 2,
+      width:
+          Theme.of(widget.state.context).textTheme.bodyText2.fontSize * 1.1 * 2,
     );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -177,7 +178,7 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
                 focusNode: _focusCountryCode,
                 decoration: InputDecoration(
                   hintText: widget.state.value.countryCodeHintText,
-                  errorText: widget.state.hasError ? "" : null,
+                  errorText: widget.state.hasError ? '' : null,
                   errorStyle: TextStyle(height: 0),
                 ),
                 textInputAction: TextInputAction.next,
@@ -191,7 +192,7 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
                     _controllerBasicBankAccountNumber,
                   ),
                   LengthLimitingTextInputFormatter(2),
-                  WhitelistingTextInputFormatter(RegExp("[A-Z]")),
+                  WhitelistingTextInputFormatter(RegExp('[A-Z]')),
                 ],
               ),
             ),
@@ -205,7 +206,7 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
                 focusNode: _focusCheckDigits,
                 decoration: InputDecoration(
                   hintText: widget.state.value.checkDigitsHintText,
-                  errorText: widget.state.hasError ? "" : null,
+                  errorText: widget.state.hasError ? '' : null,
                   errorStyle: TextStyle(height: 0),
                 ),
                 textInputAction: TextInputAction.next,
@@ -218,7 +219,7 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
                     _controllerBasicBankAccountNumber,
                   ),
                   LengthLimitingTextInputFormatter(2),
-                  WhitelistingTextInputFormatter(RegExp("[0-9]")),
+                  WhitelistingTextInputFormatter(RegExp('[0-9]')),
                 ],
               ),
             ),
@@ -230,7 +231,7 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
                 focusNode: _focusBasicBankAccountNumber,
                 decoration: InputDecoration(
                   hintText: widget.state.value.basicBankAccountNumberHintText,
-                  errorText: widget.state.hasError ? "" : null,
+                  errorText: widget.state.hasError ? '' : null,
                   errorStyle: TextStyle(height: 0),
                 ),
                 onSaved: (basicBankAccountNumber) {
