@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -246,9 +244,7 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
                   ),
                   LengthLimitingTextInputFormatter(
                       widget.state.value.maxBasicBankAccountNumberLength),
-                  // Due to a flutter issue, c.f. commit message
-                  if (Platform.isIOS)
-                    SpacedTextInputFormatter(),
+                  SpacedTextInputFormatter(),
                 ],
               ),
             ),
