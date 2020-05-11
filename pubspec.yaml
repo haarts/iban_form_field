@@ -8,7 +8,7 @@ environment:
   sdk: '>=2.4.0 <3.0.0'
 
 dependencies:
-  iban: ^0.1.1
+  iban: ^0.2.0
   flutter:
     sdk: flutter
 
