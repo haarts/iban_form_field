@@ -4,16 +4,28 @@ import 'package:flutter/services.dart';
 class SpacedTextInputFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
-    TextEditingValue oldValue,
+    TextEditingValue _oldValue,
     TextEditingValue newValue,
   ) {
+    // Find the position in the string with spaces removed
+    var oldOffset = newValue.selection.baseOffset -
+        RegExp(' ')
+            .allMatches(newValue.text)
+            .map((e) => e.start < newValue.selection.baseOffset)
+            .fold(0, (x, y) => x + (y ? 1 : 0));
     var splitText = _splitInGroupsOfFour(newValue.text);
-    var numberOfSpacesAdded = splitText.length - newValue.text.length;
+    // Find the new position by considering spaces inserted on the left
+    var newOffset = oldOffset;
+    for (var i = 0; i < oldOffset; i += 1) {
+      if (splitText[i] == ' ') {
+        newOffset += 1;
+      }
+    }
 
     return TextEditingValue(
       text: splitText,
       selection: TextSelection.collapsed(
-        offset: newValue.selection.baseOffset + numberOfSpacesAdded,
+        offset: newOffset,
       ),
     );
   }
