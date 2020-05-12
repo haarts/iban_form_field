@@ -1,3 +1,7 @@
+v0.2.0
+- Bump iban to 0.2.0
+- Fix grouping bug
+
 v0.1.9
 - Add `autofocus`
 - Generic hint texts for fields
