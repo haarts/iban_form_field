@@ -1,3 +1,6 @@
+v0.2.1
+- Fix grouping bug
+
 v0.2.0
 - Bump iban to 0.2.0
 - Fix grouping bug
