@@ -1,11 +1,11 @@
 import 'package:iban/iban.dart' as iban;
 
 class Iban {
+  Iban(this.countryCode);
+
   String countryCode;
   String checkDigits;
   String basicBankAccountNumber;
-
-  Iban(this.countryCode);
 
   String get countryCodeHintText => _example.substring(0, 2);
   String get checkDigitsHintText => _example.substring(2, 4);

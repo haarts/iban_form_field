@@ -4,16 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:iban/iban.dart' as iban;
 
 class IbanPasteInputFormatter extends TextInputFormatter {
-  TextEditingController countryCodeController;
-  TextEditingController checkDigitsController;
-  TextEditingController basicBankAccountNumberController;
-
-  final RegExp toBeReturnedPart;
-
-  static RegExp countryCodeRegExp = RegExp(r'^([A-Z]{2})');
-  static RegExp checkDigitsRegExp = RegExp(r'^[A-Z]{2}([0-9]{2})');
-  static RegExp basicBankAccountNumberRegExp = RegExp(r'^.{4}(.+$)');
-
   IbanPasteInputFormatter.countryCode(
     this.checkDigitsController,
     this.basicBankAccountNumberController,
@@ -28,6 +18,16 @@ class IbanPasteInputFormatter extends TextInputFormatter {
     this.countryCodeController,
     this.checkDigitsController,
   ) : toBeReturnedPart = basicBankAccountNumberRegExp;
+
+  TextEditingController countryCodeController;
+  TextEditingController checkDigitsController;
+  TextEditingController basicBankAccountNumberController;
+
+  final RegExp toBeReturnedPart;
+
+  static RegExp countryCodeRegExp = RegExp(r'^([A-Z]{2})');
+  static RegExp checkDigitsRegExp = RegExp(r'^[A-Z]{2}([0-9]{2})');
+  static RegExp basicBankAccountNumberRegExp = RegExp(r'^.{4}(.+$)');
 
   @override
   TextEditingValue formatEditUpdate(oldValue, newValue) {

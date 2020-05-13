@@ -35,15 +35,15 @@ class SpacedTextInputFormatter extends TextInputFormatter {
     var segments = input.split('');
     var groupSize = 4;
     var added = 0;
-    var result = '';
     var it = segments.iterator;
+    final buffer = StringBuffer();
     while (it.moveNext()) {
       if (added != 0 && added % groupSize == 0) {
-        result += ' ';
+        buffer.write(' ');
       }
       added++;
-      result += it.current;
+      buffer.write(it.current);
     }
-    return result;
+    return buffer.toString();
   }
 }

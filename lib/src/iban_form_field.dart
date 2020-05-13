@@ -17,16 +17,17 @@ class IbanFormField extends FormField<Iban> {
           onSaved: onSaved,
           validator: validator,
           initialValue: initialValue ?? Iban(''),
-          builder: (FormFieldState<Iban> state) {
+          builder: (state) {
             return IbanFormFieldBuilder(state, autofocus);
           },
         );
 }
 
 class IbanFormFieldBuilder extends StatefulWidget {
+  IbanFormFieldBuilder(this.state, this.autofocus);
+
   final FormFieldState<Iban> state;
   final bool autofocus;
-  IbanFormFieldBuilder(this.state, this.autofocus);
 
   @override
   State createState() => _IbanFormFieldState();

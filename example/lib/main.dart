@@ -43,7 +43,6 @@ class _ExampleState extends State<Example> {
                   autofocus: true,
                   validator: (iban) {
                     if (!iban.isValid) {
-                      print(iban);
                       return 'This IBAN is not valid';
                     }
                     return null;
@@ -51,7 +50,6 @@ class _ExampleState extends State<Example> {
                 ),
               ),
               RaisedButton(
-                child: Text('show'),
                 onPressed: () {
                   if (!_formKey.currentState.validate()) {
                     return;
@@ -67,6 +65,7 @@ class _ExampleState extends State<Example> {
                     },
                   );
                 },
+                child: Text('show'),
               ),
             ],
           ),
