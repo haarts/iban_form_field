@@ -31,6 +31,45 @@ void main() {
           expect(reformatted.text, equals('AAAA B'));
           expect(reformatted.selection.baseOffset, equals(6));
         });
+
+        test("of 'AAAA BB'", () {
+          var oldValue = generate('AAAA BB', 7);
+          var newValue = generate('AAAA BBC', 8);
+
+          var reformatted = SpacedTextInputFormatter().formatEditUpdate(
+            oldValue,
+            newValue,
+          );
+
+          expect(reformatted.text, equals('AAAA BBC'));
+          expect(reformatted.selection.baseOffset, equals(8));
+        });
+
+        test("of 'AAAA BBBB'", () {
+          var oldValue = generate('AAAA BBBB', 9);
+          var newValue = generate('AAAA BBBBC', 10);
+
+          var reformatted = SpacedTextInputFormatter().formatEditUpdate(
+            oldValue,
+            newValue,
+          );
+
+          expect(reformatted.text, equals('AAAA BBBB C'));
+          expect(reformatted.selection.baseOffset, equals(11));
+        });
+
+        test("of 'AAAA BBBB CCCC'", () {
+          var oldValue = generate('AAAA BBBB CCCC', 14);
+          var newValue = generate('AAAA BBBB CCCCD', 15);
+
+          var reformatted = SpacedTextInputFormatter().formatEditUpdate(
+            oldValue,
+            newValue,
+          );
+
+          expect(reformatted.text, equals('AAAA BBBB CCCC D'));
+          expect(reformatted.selection.baseOffset, equals(16));
+        });
       });
 
       group('in the middle', () {

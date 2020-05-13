@@ -16,7 +16,7 @@ class SpacedTextInputFormatter extends TextInputFormatter {
     var splitText = _splitInGroupsOfFour(newValue.text);
     // Find the new position by considering spaces inserted on the left
     var newOffset = oldOffset;
-    for (var i = 0; i < oldOffset; i += 1) {
+    for (var i = 0; i < newOffset; i += 1) {
       if (splitText[i] == ' ') {
         newOffset += 1;
       }
