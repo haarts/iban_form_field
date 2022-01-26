@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:test/test.dart';
 import 'package:iban_form_field/src/input_formatters/spaced_text_input_formatter.dart';
+import 'package:test/test.dart';
 
 void main() {
   group('adding', () {

@@ -1,6 +1,5 @@
-import 'package:test/test.dart';
-
 import 'package:iban_form_field/iban_form_field.dart';
+import 'package:test/test.dart';
 
 void main() {
   test('electronicFormat', () {

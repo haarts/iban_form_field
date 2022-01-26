@@ -1,3 +1,6 @@
+v0.2.2
+- bump Flutter compat
+
 v0.2.1
 - Fix grouping bug
 

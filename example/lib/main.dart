@@ -49,7 +49,7 @@ class _ExampleState extends State<Example> {
                   },
                 ),
               ),
-              RaisedButton(
+              ElevatedButton(
                 onPressed: () {
                   if (!_formKey.currentState.validate()) {
                     return;
