@@ -3,9 +3,9 @@ import 'package:iban/iban.dart' as iban;
 class Iban {
   Iban(this.countryCode);
 
-  String countryCode;
-  String checkDigits;
-  String basicBankAccountNumber;
+  String? countryCode;
+  String? checkDigits;
+  String? basicBankAccountNumber;
 
   String get countryCodeHintText => _example.substring(0, 2);
   String get checkDigitsHintText => _example.substring(2, 4);
@@ -31,9 +31,9 @@ class Iban {
   String get _example {
     var particularSpecification = iban.specifications['CH'];
     if (iban.specifications.containsKey(countryCode)) {
-      particularSpecification = iban.specifications[countryCode];
+      particularSpecification = iban.specifications[countryCode!];
     }
-    return particularSpecification.example;
+    return particularSpecification!.example;
   }
 
   @override

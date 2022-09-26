@@ -7,10 +7,10 @@ import 'package:iban_form_field/src/input_formatters/spaced_text_input_formatter
 
 class IbanFormField extends FormField<Iban> {
   IbanFormField({
-    Key key,
-    FormFieldSetter<Iban> onSaved,
-    FormFieldValidator<Iban> validator,
-    Iban initialValue,
+    Key? key,
+    FormFieldSetter<Iban>? onSaved,
+    FormFieldValidator<Iban>? validator,
+    Iban? initialValue,
     bool autofocus = false,
   }) : super(
           key: key,
@@ -48,50 +48,50 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
   final FocusNode _focusBasicBankAccountNumber = FocusNode();
 
   // Used to determine if the user added or deleted characters
-  int _previousCountryCodeLength;
-  int _previousCheckDigitsLength;
-  int _previousBasicBankAccountNumberLength;
+  int? _previousCountryCodeLength;
+  int? _previousCheckDigitsLength;
+  int? _previousBasicBankAccountNumberLength;
 
-  bool _lastCountryCodeCharacterAdded(int currentLength, int previousLength) {
+  bool _lastCountryCodeCharacterAdded(int currentLength, int? previousLength) {
     return currentLength == _maxCountryCodeLength &&
-        currentLength - previousLength == 1;
+        currentLength - previousLength! == 1;
   }
 
-  bool _lastCheckDigitCharacterAdded(int currentLength, int previousLength) {
+  bool _lastCheckDigitCharacterAdded(int currentLength, int? previousLength) {
     return currentLength == _maxCheckDigitLength &&
-        currentLength - previousLength == 1;
+        currentLength - previousLength! == 1;
   }
 
-  bool _lastCheckDigitCharacterDeleted(int currentLength, int previousLength) {
-    return currentLength == 0 && currentLength - previousLength == -1;
+  bool _lastCheckDigitCharacterDeleted(int currentLength, int? previousLength) {
+    return currentLength == 0 && currentLength - previousLength! == -1;
   }
 
   bool _lastBasicBankAccountNumberCharacterDeleted(
-      int currentLength, int previousLength) {
-    return currentLength == 0 && currentLength - previousLength == -1;
+      int currentLength, int? previousLength) {
+    return currentLength == 0 && currentLength - previousLength! == -1;
   }
 
   @override
   void initState() {
     super.initState();
 
-    _controllerCountryCode.text = widget.state.value.countryCode;
-    _controllerCheckDigits.text = widget.state.value.checkDigits;
+    _controllerCountryCode.text = widget.state.value!.countryCode!;
+    _controllerCheckDigits.text = widget.state.value!.checkDigits ?? "";
     _controllerBasicBankAccountNumber.text =
-        widget.state.value.basicBankAccountNumber;
+        widget.state.value!.basicBankAccountNumber ?? "";
 
-    _previousCountryCodeLength = widget.state.value.countryCode?.length ?? 0;
-    _previousCheckDigitsLength = widget.state.value.checkDigits?.length ?? 0;
+    _previousCountryCodeLength = widget.state.value!.countryCode?.length ?? 0;
+    _previousCheckDigitsLength = widget.state.value!.checkDigits?.length ?? 0;
     _previousBasicBankAccountNumberLength =
-        widget.state.value.basicBankAccountNumber?.length ?? 0;
+        widget.state.value!.basicBankAccountNumber?.length ?? 0;
 
     _controllerCountryCode.addListener(() {
-      widget.state.value.countryCode = _controllerCountryCode.text;
+      widget.state.value!.countryCode = _controllerCountryCode.text;
 
       if (_lastCountryCodeCharacterAdded(
           _controllerCountryCode.text.length, _previousCountryCodeLength)) {
         setState(() {
-          widget.state.value.countryCode = _controllerCountryCode.text;
+          widget.state.value!.countryCode = _controllerCountryCode.text;
         });
         _focusCountryCode.nextFocus();
       }
@@ -100,7 +100,7 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
     });
 
     _controllerCheckDigits.addListener(() {
-      widget.state.value.checkDigits = _controllerCheckDigits.text;
+      widget.state.value!.checkDigits = _controllerCheckDigits.text;
 
       if (_lastCheckDigitCharacterDeleted(
           _controllerCheckDigits.text.length, _previousCheckDigitsLength)) {
@@ -116,7 +116,7 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
     });
 
     _controllerBasicBankAccountNumber.addListener(() {
-      widget.state.value.basicBankAccountNumber =
+      widget.state.value!.basicBankAccountNumber =
           _controllerBasicBankAccountNumber.text;
 
       if (_lastBasicBankAccountNumberCharacterDeleted(
@@ -159,8 +159,9 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
   @override
   Widget build(BuildContext context) {
     var constraints = BoxConstraints.tightFor(
-      width:
-          Theme.of(widget.state.context).textTheme.bodyText2.fontSize * 1.1 * 2,
+      width: Theme.of(widget.state.context).textTheme.bodyText2!.fontSize! *
+          1.1 *
+          2,
     );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -176,13 +177,13 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
                 autofocus: _autofocusForCountryCode(),
                 focusNode: _focusCountryCode,
                 decoration: InputDecoration(
-                  hintText: widget.state.value.countryCodeHintText,
+                  hintText: widget.state.value!.countryCodeHintText,
                   errorText: widget.state.hasError ? '' : null,
                   errorStyle: TextStyle(height: 0),
                 ),
                 textInputAction: TextInputAction.next,
                 onSaved: (countryCode) {
-                  widget.state.value.countryCode = countryCode;
+                  widget.state.value!.countryCode = countryCode;
                 },
                 textCapitalization: TextCapitalization.characters,
                 inputFormatters: [
@@ -204,13 +205,13 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
                 autofocus: _autofocusForCheckDigits(),
                 focusNode: _focusCheckDigits,
                 decoration: InputDecoration(
-                  hintText: widget.state.value.checkDigitsHintText,
+                  hintText: widget.state.value!.checkDigitsHintText,
                   errorText: widget.state.hasError ? '' : null,
                   errorStyle: TextStyle(height: 0),
                 ),
                 textInputAction: TextInputAction.next,
                 onSaved: (checkDigits) {
-                  widget.state.value.checkDigits = checkDigits;
+                  widget.state.value!.checkDigits = checkDigits;
                 },
                 inputFormatters: [
                   IbanPasteInputFormatter.checkDigits(
@@ -229,12 +230,12 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
                 autofocus: _autofocusForBasicBankAccountNumbers(),
                 focusNode: _focusBasicBankAccountNumber,
                 decoration: InputDecoration(
-                  hintText: widget.state.value.basicBankAccountNumberHintText,
+                  hintText: widget.state.value!.basicBankAccountNumberHintText,
                   errorText: widget.state.hasError ? '' : null,
                   errorStyle: TextStyle(height: 0),
                 ),
                 onSaved: (basicBankAccountNumber) {
-                  widget.state.value.basicBankAccountNumber =
+                  widget.state.value!.basicBankAccountNumber =
                       basicBankAccountNumber;
                 },
                 textCapitalization: TextCapitalization.characters,
@@ -244,7 +245,7 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
                     _controllerCheckDigits,
                   ),
                   LengthLimitingTextInputFormatter(
-                      widget.state.value.maxBasicBankAccountNumberLength),
+                      widget.state.value!.maxBasicBankAccountNumberLength),
                   SpacedTextInputFormatter(),
                 ],
               ),
@@ -255,11 +256,11 @@ class _IbanFormFieldState extends State<IbanFormFieldBuilder> {
           Padding(
             padding: EdgeInsets.only(top: 5),
             child: Text(
-              widget.state.errorText,
+              widget.state.errorText!,
               style: Theme.of(context).inputDecorationTheme.errorStyle ??
                   Theme.of(context)
                       .textTheme
-                      .caption
+                      .caption!
                       .copyWith(color: Theme.of(context).errorColor),
             ),
           ),

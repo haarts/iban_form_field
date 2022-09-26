@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -19,9 +20,9 @@ class IbanPasteInputFormatter extends TextInputFormatter {
     this.checkDigitsController,
   ) : toBeReturnedPart = basicBankAccountNumberRegExp;
 
-  TextEditingController countryCodeController;
-  TextEditingController checkDigitsController;
-  TextEditingController basicBankAccountNumberController;
+  TextEditingController? countryCodeController;
+  TextEditingController? checkDigitsController;
+  TextEditingController? basicBankAccountNumberController;
 
   final RegExp toBeReturnedPart;
 
@@ -32,10 +33,9 @@ class IbanPasteInputFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(oldValue, newValue) {
     var possibleIban = newValue.text.replaceAll(' ', '');
-    var matchedSpecification = iban.specifications.values.firstWhere(
+    var matchedSpecification = iban.specifications.values.firstWhereOrNull(
       (specification) => RegExp(_withoutAnchors(specification.regexDef))
           .hasMatch(possibleIban),
-      orElse: () => null,
     );
 
     if (matchedSpecification == null) {
@@ -43,12 +43,12 @@ class IbanPasteInputFormatter extends TextInputFormatter {
     }
 
     var flatIban = RegExp(_withoutAnchors(matchedSpecification.regexDef))
-        .firstMatch(possibleIban)
-        .group(0);
+        .firstMatch(possibleIban)!
+        .group(0)!;
 
     _filloutOtherControllers(flatIban);
 
-    var newText = _inGroupsOf4(toBeReturnedPart.firstMatch(flatIban).group(1));
+    var newText = _inGroupsOf4(toBeReturnedPart.firstMatch(flatIban)!.group(1)!);
     return TextEditingValue(
       text: newText,
       selection: TextSelection.collapsed(
@@ -59,20 +59,20 @@ class IbanPasteInputFormatter extends TextInputFormatter {
 
   void _filloutOtherControllers(String flatIban) {
     if (toBeReturnedPart == countryCodeRegExp) {
-      checkDigitsController.text =
-          checkDigitsRegExp.firstMatch(flatIban).group(1);
-      basicBankAccountNumberController.text = _inGroupsOf4(
-          basicBankAccountNumberRegExp.firstMatch(flatIban).group(1));
+      checkDigitsController!.text =
+          checkDigitsRegExp.firstMatch(flatIban)!.group(1)!;
+      basicBankAccountNumberController!.text = _inGroupsOf4(
+          basicBankAccountNumberRegExp.firstMatch(flatIban)!.group(1)!);
     } else if (toBeReturnedPart == checkDigitsRegExp) {
-      countryCodeController.text =
-          countryCodeRegExp.firstMatch(flatIban).group(1);
-      basicBankAccountNumberController.text = _inGroupsOf4(
-          basicBankAccountNumberRegExp.firstMatch(flatIban).group(1));
+      countryCodeController!.text =
+          countryCodeRegExp.firstMatch(flatIban)!.group(1)!;
+      basicBankAccountNumberController!.text = _inGroupsOf4(
+          basicBankAccountNumberRegExp.firstMatch(flatIban)!.group(1)!);
     } else {
-      countryCodeController.text =
-          countryCodeRegExp.firstMatch(flatIban).group(1);
-      checkDigitsController.text =
-          checkDigitsRegExp.firstMatch(flatIban).group(1);
+      countryCodeController!.text =
+          countryCodeRegExp.firstMatch(flatIban)!.group(1)!;
+      checkDigitsController!.text =
+          checkDigitsRegExp.firstMatch(flatIban)!.group(1)!;
     }
   }
 

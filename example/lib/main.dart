@@ -24,7 +24,7 @@ class Example extends StatefulWidget {
 }
 
 class _ExampleState extends State<Example> {
-  Iban _iban;
+  Iban? _iban;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class _ExampleState extends State<Example> {
                   initialValue: Iban('NL'),
                   autofocus: true,
                   validator: (iban) {
-                    if (!iban.isValid) {
+                    if (!iban!.isValid) {
                       return 'This IBAN is not valid';
                     }
                     return null;
@@ -51,11 +51,11 @@ class _ExampleState extends State<Example> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  if (!_formKey.currentState.validate()) {
+                  if (!_formKey.currentState!.validate()) {
                     return;
                   }
 
-                  _formKey.currentState.save();
+                  _formKey.currentState!.save();
                   showDialog(
                     context: context,
                     builder: (context) {

@@ -24,7 +24,7 @@ class SpacedTextInputFormatter extends TextInputFormatter {
     return TextEditingValue(
       text: splitText,
       selection: TextSelection.collapsed(
-        offset: newOffset,
+        offset: newOffset as int,
       ),
     );
   }
