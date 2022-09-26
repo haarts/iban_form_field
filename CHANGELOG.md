@@ -1,3 +1,6 @@
+v0.2.3
+- make null safe
+
 v0.2.2
 - bump Flutter compat
 
